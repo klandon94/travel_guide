@@ -1,0 +1,70 @@
+{% extends 'travel/index.html' %}
+
+{% block title %} Add Plan {%endblock%}
+
+{% block addplan %}
+
+<nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand active'>Travel Dashboard</a>
+        </div>
+        <ul class='nav navbar-nav navbar-center'>
+            <li><a><span class='glyphicon glyphicon-user'></span>{{request.session.user}}</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <li><a href='/travels'><span class='glyphicon glyphicon-home'></span> Home</a></li>
+            <li><a href='/logout'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id='addtrip'>
+<h1>Add New Trip</h1>
+<form action='/addnew' method='post'>
+    {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.extra_tags == 'newdest' %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class='form-group form-inline'>
+        Destination: <input class='form-control' type='text' name='newdest' value='{{request.session.newdest}}' placeholder='Destination'><br>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.extra_tags == 'newdesc' %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class='form-group form-inline'>
+        Description: <input class='form-control' type='text' name='newdesc' value='{{request.session.newdesc}}' placeholder='Description'><br>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.extra_tags == 'newfrom' %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class='form-group form-inline'>
+        Travel Date From: <input class='form-control' type='text' name='newfrom' value='{{request.session.newfrom}}' placeholder='YYYY-MM-DD'><br>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.extra_tags == 'newend' %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class='form-group form-inline'>
+        Travel Date To: <input class='form-control' type='text' name='newend' value='{{request.session.newend}}' placeholder='YYYY-MM-DD'><br>
+    </div>
+    <button class='btn btn-primary' type='submit' value='Add Trip'>Add!</button>
+</form>
+</div>
+
+{% endblock %}

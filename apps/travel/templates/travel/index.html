@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Optional theme --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<style>
+    #login{
+        margin-left:75px;
+        margin-bottom:25px;
+    }
+    #container{
+        display:flex;
+        justify-content: space-around;
+    }
+    #register{
+        margin-left:50px;
+        width:40%
+    }
+    #login{
+        width:40%;
+    }
+    .form-group{
+        width:75%;
+    }
+    button{
+        margin-top:15px;
+    }
+    #logout{
+        margin-left:30px;
+    }
+    .indent{
+        margin-left:20px;
+    }
+    #mytrips{
+        margin-top:50px;
+    }
+    #othertrips{
+        margin-top:150px;
+    }
+    .mydes{
+        padding-left:50px;
+        padding-top:30px;
+    }
+    .joiners{
+        padding-left:50px;
+        padding-top:50px;
+    }
+    .othertrip{
+        color:darkred;
+        font-weight:bold;
+    }
+    #addnew{
+        display:flex;
+        justify-content:flex-end;
+        margin-top:25px;
+        margin-right:50px;
+    }
+    #addtrip{
+        padding-top:30px;
+        padding-left:40px;
+    }
+    .error{
+        color:darkred;
+        font-weight:bold;
+    }
+    .success{
+        color:darkgreen;
+        font-weight:bold;
+    }
+</style>
+<body>
+    {% block login %}
+    {% endblock %}
+
+    {% block dashboard %}
+    {% endblock %}
+
+    {% block destination %}
+    {% endblock %}
+
+    {% block addplan %}
+    {% endblock %}
+</body>
+</html>

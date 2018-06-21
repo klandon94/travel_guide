@@ -1,0 +1,96 @@
+{% extends 'travel/index.html' %}
+
+{% block title %} Travel Dashboard {%endblock%}
+
+{% block dashboard %}
+
+<nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand active'>Travel Dashboard</a>
+        </div>
+        <ul class='nav navbar-nav navbar-center'>
+            <li><a><span class='glyphicon glyphicon-user'></span>Welcome, {{request.session.user}}</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <li><a href='/logout'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.extra_tags == 'joined' %}
+            <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<center>
+    <div id='mytrips'>
+    <h2>Your Trip Schedules</h2>
+    <table class='table table-bordered' style='width:80%'>
+        <thead>
+            <tr>
+                <th>Destination</th>                
+                <th>Travel Start Date</th>                
+                <th>Travel End Date</th>                
+                <th>Description</th>                
+            </tr>
+        </thead>
+        {% if mytrips %}
+        {% for trip in mytrips.all %}
+            {% if trip.planner == myself %}
+                <tbody>
+                    <td><a href='travels/destination/{{trip.id}}'>{{trip.destination}}</a></td>
+                    <td>{{trip.start_date}}</td>
+                    <td>{{trip.end_date}}</td>
+                    <td>{{trip.desc}}</td>
+                </tbody>
+            {%else%}
+                <tbody class='othertrip'>
+                    <td><a href='travels/destination/{{trip.id}}'>{{trip.destination}}</a></td>
+                    <td>{{trip.start_date}}</td>
+                    <td>{{trip.end_date}}</td>
+                    <td>{{trip.desc}}</td>
+                </tbody>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    </table>
+    </div>
+</center>
+
+<center>
+    <div id='othertrips'>
+        <h2>Other Users' Trip Schedules</h2>
+        <table class='table table-bordered' style='width:80%'>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Do you want to join?</th>
+                </tr>
+            </thead>
+            {% if othertrips %}
+                {% for trip in othertrips.all %}
+                    <tbody>
+                        <td>{{trip.planner.first_name}} {{trip.planner.last_name}}</td>
+                        <td><a href='travels/destination/{{trip.id}}'>{{trip.destination}}</a></td>
+                        <td>{{trip.start_date}}</td>
+                        <td>{{trip.end_date}}</td>
+                        <td><a href='travels/join/{{trip.id}}'>Join!</a></td>
+                    </tbody>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+</center>
+
+<div id='addnew'>
+    <a href='travels/add'>Add New Travel Plan</a>
+</div>
+
+{% endblock %}

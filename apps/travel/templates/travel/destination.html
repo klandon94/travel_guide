@@ -1,0 +1,39 @@
+{% extends 'travel/index.html' %}
+
+{% block title %} Destination {%endblock%}
+
+{% block destination %}
+
+<nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand active'>Travel Dashboard</a>
+        </div>
+        <ul class='nav navbar-nav navbar-center'>
+            <li><a><span class='glyphicon glyphicon-user'></span>{{request.session.user}}</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <li><a href='/travels'><span class='glyphicon glyphicon-home'></span> Home</a></li>
+            <li><a href='/logout'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class='mydes'>
+<h1>Destination: {{dest.destination}}</h1>
+    <p class='indent'><b>Planned By:</b> {{dest.planner.first_name}} {{dest.planner.last_name}}</p>
+    <p class='indent'><b>Description:</b> {{dest.desc}}</p>
+    <p class='indent'><b>Travel Date from:</b> {{dest.start_date}}</p>
+    <p class='indent'><b>Travel Date to:</b> {{dest.end_date}}</p>
+</div>
+
+<div class='joiners'>
+    <h3>Other users joining</h3>
+    {% if dest.joiners %}
+        {% for joiner in dest.joiners.all %}
+            <p class='indent'>{{joiner.first_name}} {{joiner.last_name}}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

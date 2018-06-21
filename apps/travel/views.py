@@ -56,7 +56,7 @@ def login(req):
 
 def dashboard(req):
     if 'logged_in' in req.session and req.session['logged_in'] == True:
-        mytrips = Trip.objects.filter(planner__id=req.session['id']) | Trip.objects.filter(joiners__id=req.session['id'])
+        mytrips = Trip.objects.distinct().filter(planner__id=req.session['id']) | Trip.objects.distinct().filter(joiners__id=req.session['id'])
         othertrips = Trip.objects.exclude(planner__id=req.session['id']) & Trip.objects.exclude(joiners__id=req.session['id'])
         context = {
             'mytrips': mytrips,

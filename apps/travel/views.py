@@ -25,7 +25,7 @@ def register(req):
     errors = User.objects.register_validator(req.POST)
     if len(errors):
         for key,value in errors.items():
-            messages.error(req, value, f'{key}')
+            messages.error(req, value, key)
         return redirect('/main')
     else:
         hash1 = bcrypt.hashpw(req.POST['password'].encode(), bcrypt.gensalt())
@@ -85,7 +85,7 @@ def addnew(req):
     errors = Trip.objects.newtrip_validator(req.POST)
     if len(errors):
         for key,value in errors.items():
-            messages.error(req, value, f'{key}')
+            messages.error(req, value, key)
         return redirect('/travels/add')
     else:
         Trip.objects.create(planner=User.objects.get(id=req.session['id']), destination=req.POST['newdest'], desc=req.POST['newdesc'], start_date=req.POST['newfrom'], end_date=req.POST['newend'])
